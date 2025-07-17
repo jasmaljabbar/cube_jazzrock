@@ -16,6 +16,14 @@ cube(`batches`, {
       type: `number`,
       primary_key: true
     },
+    courseid: {
+      sql: `course_id`,
+      type: `number`
+    },
+    teacher_id: {
+      sql: `teacher_id`,
+      type: `number`
+    },
     
     branch: {
       sql: `branch`,
