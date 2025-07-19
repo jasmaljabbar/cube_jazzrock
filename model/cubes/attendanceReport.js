@@ -9,6 +9,7 @@ cube(`AttendanceReport`, {
     s.first_name || ' ' || s.last_name AS student_name,
     s.student_id AS student_roll_number,
     b.name AS batch_name,
+    b.branch AS branch_name,  
     c.name AS course_name,
     u.full_name AS teacher_name,
     sch.day,
@@ -89,6 +90,16 @@ cube(`AttendanceReport`, {
             sql: `batch_name`,
             type: `string`
         },
+
+        // branchId:{
+        //     sql:`branch_id`,
+        //     type:`number`
+        // },
+
+        branchName: {
+            sql: `branch_name`,
+            type: `string`
+            },
 
         courseName: {
             sql: `course_name`,
