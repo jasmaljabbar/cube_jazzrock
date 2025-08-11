@@ -4,6 +4,14 @@ cube(`students`, {
   data_source: `default`,
   
   joins: {
+    enrollments: {
+      sql: `${CUBE}.id = ${enrollments}.student_id`,
+      relationship: `one_to_many`
+    },
+    credit_notes: {
+      sql: `${CUBE}.id = ${credit_notes}.student_id`,
+      relationship: `hasMany`
+    },
     parents: {
       sql: `${CUBE}.parent_id = ${parents.id}`,
       relationship: `many_to_one`
@@ -41,9 +49,19 @@ cube(`students`, {
       sql: `email`,
       type: `string`
     },
+
+    fullName: {
+      sql: `${CUBE}.first_name || ' ' || ${CUBE}.last_name`,
+      type: `string`
+    },
     
     first_name: {
       sql: `first_name`,
+      type: `string`
+    },
+
+    lastName: {
+      sql: `last_name`,
       type: `string`
     },
     

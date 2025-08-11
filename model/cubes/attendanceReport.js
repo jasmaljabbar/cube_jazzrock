@@ -6,6 +6,8 @@ cube(`AttendanceReport`, {
     a.batch_id,
     a.date,
     a.status,
+    a.compensation_date,
+    a.compensation_batch_name,
     s.first_name || ' ' || s.last_name AS student_name,
     s.student_id AS student_roll_number,
     b.name AS batch_name,
@@ -108,6 +110,14 @@ cube(`AttendanceReport`, {
 
         teacherName: {
             sql: `teacher_name`,
+            type: `string`
+        },
+        compensationBatchName:{
+            sql: `compensation_batch_name`,
+            type: `string`
+        },
+        compensationDate:{
+            sql: `compensation_date`,
             type: `string`
         },
 

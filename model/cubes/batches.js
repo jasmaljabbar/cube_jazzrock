@@ -4,6 +4,10 @@ cube(`batches`, {
   data_source: `default`,
   
   joins: {
+     employees: {
+      sql: `${CUBE}.teacher_id = ${employees.id}`,
+      relationship: `many_to_one`
+    },
     courses: {
       sql: `${CUBE}.course_id = ${courses.id}`,
       relationship: `many_to_one`
