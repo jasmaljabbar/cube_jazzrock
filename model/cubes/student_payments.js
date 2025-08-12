@@ -4,15 +4,12 @@ cube(`student_payments`, {
   data_source: `default`,
   
   joins: {
-    payments: {
-      sql: `${CUBE.payment_id} = ${payments.id}`,
-      relationship: `many_to_one`
-    },
-    
+    // FIX: Correct the join to use the primary key of the students table
     students: {
-      sql: `${CUBE}.student_id = ${students.student_id}`,
+      sql: `${CUBE}.student_id = ${students.id}`,
       relationship: `many_to_one`
     }
+    // We remove the confusing join to 'payments' as it's not needed for this path
   },
   
   dimensions: {
@@ -81,6 +78,10 @@ cube(`student_payments`, {
   measures: {
     count: {
       type: `count`
+    },
+    totalAmount: {
+      sql: `amount`,
+      type: `sum`
     }
   },
   

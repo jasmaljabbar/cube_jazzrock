@@ -4,9 +4,9 @@ cube(`receipts`, {
   data_source: `default`,
   
   joins: {
-    payments: {
-      sql: `${CUBE.payment_id} = ${payments.id}`,
-      relationship: `many_to_one`
+    student_payments: {
+      sql: `${CUBE}.payment_id = ${student_payments}.payment_id`,
+      relationship: `belongsTo`
     }
   },
   
@@ -61,6 +61,10 @@ cube(`receipts`, {
   measures: {
     count: {
       type: `count`
+    },
+    totalAmount: {
+      sql: `amount`,
+      type: `sum`
     }
   },
   
