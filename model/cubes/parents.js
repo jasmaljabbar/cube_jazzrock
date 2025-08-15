@@ -4,6 +4,10 @@ cube(`parents`, {
   data_source: `default`,
   
   joins: {
+    students: {
+      sql: `${CUBE}.id = ${students.parent_id}`,
+      relationship: `hasMany`
+    },
     users: {
       sql: `${CUBE}.user_id = ${users.id}`,
       relationship: `many_to_one`
@@ -15,6 +19,11 @@ cube(`parents`, {
       sql: `id`,
       type: `number`,
       primary_key: true
+    },
+
+    fullName: {
+      sql: `${CUBE}.first_name || ' ' || ${CUBE}.last_name`,
+      type: `string`
     },
     
     community: {

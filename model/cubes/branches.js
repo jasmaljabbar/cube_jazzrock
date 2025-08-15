@@ -2,6 +2,13 @@ cube(`branches`, {
   sql_table: `public.branches`,
   data_source: `default`,
 
+  joins: {
+       batches: {
+          sql: `${CUBE}.name = ${batches}.branch`,
+          relationship: `hasMany`
+      }
+  },
+
   dimensions: {
     id: {
       sql: `id`,

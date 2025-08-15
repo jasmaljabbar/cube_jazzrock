@@ -16,7 +16,10 @@ cube(`schedule`, {
       type: `number`,
       primary_key: true
     },
-    
+    batchId: {
+      sql: `batch_id`,
+      type: `number`
+    },
     day: {
       sql: `day`,
       type: `string`
@@ -27,16 +30,16 @@ cube(`schedule`, {
       type: `time`
     },
     
-    end_time: {
-      sql: `end_time`,
-      type: `time`
-    },
-    
     start_time: {
-      sql: `start_time`,
-      type: `time`
+      sql: `TO_CHAR(start_time, 'HH24:MI:SS')`, // Format as string
+      type: `string`
+    },
+    end_time: {
+      sql: `TO_CHAR(end_time, 'HH24:MI:SS')`,
+      type: `string`
     }
   },
+  
   
   measures: {
     count: {

@@ -14,7 +14,8 @@ cube(`Attendance`, {
 
   measures: {
     count: {
-      type: `count`
+      type: `count`,
+      description: "Total number of attendance records."
     },
     presentCount: {
       type: 'count',
@@ -24,6 +25,13 @@ cube(`Attendance`, {
       type: 'number',
       sql: `${presentCount} * 100.0 / NULLIF(${count}, 0)`,
       format: 'percent'
+    },
+    compensationClassesCount: {
+      type: `count`,
+      filters: [
+        { sql: `${CUBE}.compensation_date IS NOT NULL` }
+      ],
+      description: "Total number of classes that were compensated."
     }
   },
 
@@ -61,6 +69,19 @@ cube(`Attendance`, {
       sql: `date`,
       type: `time`
     },
+    compensationBatchName: {
+      sql: `compensation_batch_name`,
+      type: `string`
+    },
+    compensationDate: {
+      sql: `compensation_date`,
+      type: `time`
+    },
+    isCompensation: {
+      type: `boolean`,
+      sql: `${CUBE}.compensation_date IS NOT NULL`
+    },
+
     // Added dimensions for course and branch from students table
     course: {
       sql: `${students.course}`,

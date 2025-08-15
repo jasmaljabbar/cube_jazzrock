@@ -4,6 +4,15 @@ cube(`batches`, {
   data_source: `default`,
   
   joins: {
+    branches: {
+      sql: `${CUBE}.branch = ${branches}.name`,
+      relationship: `many_to_one`
+    },
+    // FIX: Add the reverse join to schedule
+    schedule: {
+        sql: `${CUBE}.id = ${schedule}.batch_id`,
+        relationship: `hasMany`
+    },
      employees: {
       sql: `${CUBE}.teacher_id = ${employees.id}`,
       relationship: `many_to_one`

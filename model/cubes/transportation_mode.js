@@ -4,7 +4,10 @@ cube(`transportation_mode`, {
   data_source: `default`,
   
   joins: {
-    
+    transportation: {
+      sql: `${CUBE}.id = ${transportation}.mode_id`,
+      relationship: `hasMany`
+    }
   },
   
   dimensions: {

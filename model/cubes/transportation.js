@@ -5,7 +5,11 @@ cube(`transportation`, {
   
   joins: {
     students: {
-      sql: `${CUBE}.student_id = ${students.student_id}`,
+      sql: `${CUBE}.student_id = ${students.id}`,
+      relationship: `many_to_one`
+    },
+    transportation_mode: {
+      sql: `${CUBE}.mode_id = ${transportation_mode}.id`,
       relationship: `many_to_one`
     }
   },
@@ -85,7 +89,14 @@ cube(`transportation`, {
   
   measures: {
     count: {
-      type: `count`
+      type: `count`,
+      description: "Number of students using transport"
+    },
+    // FIX: Added a measure for the total revenue from transport.
+    totalRevenue: {
+      sql: `total_amount`,
+      type: `sum`,
+      format: `currency`
     }
   },
   
